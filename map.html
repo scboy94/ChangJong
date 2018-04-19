@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+   <title>지도</title>
+   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+   <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=RdIgAA_QtVYW9uHKLBSW&submodules=geocoder"></script>
+</head>
+
+<body>
+
+   <style type="text/css">
+
+      .map_wrap {
+         background:#efefef;
+         text-align:center;
+      }
+      .map_wrap .map_div {
+         border-radius:5px;
+         border:4px solid gray;
+         display:inline-block;
+         height:550px;
+         margin:3px;
+         vertical-align:top;
+         width:550px;
+      }
+      .map_wrap .map_tit {
+         display:inline-block;
+         font-size:14pt !important;
+         padding:5px 0;
+         width:550px;
+      }
+
+   </style>
+
+   <div class="map_wrap">
+      <div id="map_v3" class="map_div"></div>
+   </div>
+
+   <script type="text/javascript">
+      var bFlat = new naver.maps.LatLng(37.304915, 127.926951),
+      map = new naver.maps.Map('map_v3', {
+          center: bFlat,
+          zoom: 12
+      }),
+      marker = new naver.maps.Marker({
+          map: map,
+          position: bFlat
+      });
+
+      var contentString = [
+        '<div class="iw_inner">',
+        '   <h3>비플랫</h3>',
+        '   <p>강원도 원주시 판부면 도매촌길 46 2층<br />강원도 원주시 판부면 서곡리 773-3<br />',
+        '       033-763-6088 | 카페,디저트 &gt; 카페<br />',
+        '       <a href="blog.naver.com/dosung98" target="_blank">blog.naver.com/dosung98/</a>',
+        '   </p>',
+        '</div>'
+    ].join('');
+
+var infowindow = new naver.maps.InfoWindow({
+    content: contentString,
+    maxWidth: 300,
+    backgroundColor: "#eee",
+    borderColor: "#2db400",
+    borderWidth: 5,
+    anchorSize: new naver.maps.Size(30, 30),
+    anchorSkew: true,
+    anchorColor: "#eee",
+    pixelOffset: new naver.maps.Point(20, -20)
+});
+
+naver.maps.Event.addListener(marker, "click", function(e) {
+    if (infowindow.getMap()) {
+        infowindow.close();
+    } else {
+        infowindow.open(map, marker);
+    }
+});
+   </script>
+
+
+</body>
+</html>

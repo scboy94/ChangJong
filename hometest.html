@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = "utf-8">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+img{
+
+  max-width: 100%;
+  width: 1920px;
+}
+  form {
+    position:absolute;
+   width:165%;
+   height:17px;
+   margin-top:0px;
+   _margin-top:7px;
+   padding-top:3px;
+
+  }
+  ul{
+    width:100%;
+    height:30px;
+    background:black;
+    list-style:none;
+    padding-top:15px
+  }
+	ul li{
+    display:inline-block;
+    margin-right:60px
+  }
+	ul li a{
+    font-size:15px;
+    color:white;
+    font-weight:bold;
+    text-decoration:none
+  }
+
+</style>
+
+</head>
+
+<body>
+
+<div style="text-align:center">
+  <form method="POST" action="loginCheck.php">
+    <br>
+    <label>ID : <input type="text" name = "loginID" /></label>
+    <br>
+    <br>
+    <label>PW : <input type="password" name="loginPW" /></label>
+    <br>
+    <br>
+    <input type ="submit"/>
+    <input type="button" name = "Register" value = "회원가입" onclick = "location.href='http://localhost/join.php'"; />
+  </form>
+<br>
+<h1><font color="black">Bflat</h1>
+<br>
+
+
+<ul>
+
+	<li><a href="https://www.naver.com">비플렛은</a></li>
+	<li><a href="#">메뉴소개</a></li>
+	<li><a href="map.html">오시는길</a></li>
+	<li><a href="index.html">고객 게시판</a></li>
+	<li><a href="index.html">공지사항</a></li>
+  <li><a href="response3.html">좌석예약</a></li>
+
+	</ul>
+</div>
+<img src = "bflatpx.jpg">
+</body>
+</html>

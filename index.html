@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <title>비플랫</title>
+
+  <script>
+    var page_num;
+    var max_page_num;
+    var post_num;
+    var max_post;
+    var i, j;
+
+    function initialize_table(n) {
+      page_num = n;
+      post_num = $("#select_box option:selected").val();
+
+      $(".copyTo").empty();
+      $(document).ready(function() {
+        $.getJSON("db.json", function( data ) {
+          i = 0;
+          $.each(data, function(entryIndex, entry) {
+            i++;
+          });
+          max_post = i;
+          max_page_num = Math.ceil(max_post/post_num);
+
+          setPage();
+          $.each(data, function(entryIndex, entry) {
+            if(entryIndex >= post_num*page_num && entryIndex < post_num*(page_num+1) ) {
+              $(".clone_copy:first").clone().appendTo(".copyTo");
+              $(".clone_copy:last").css("display","block");
+              $(".table_sub:last td").eq(0).text(entry.data);
+            }
+          });
+        });
+      });
+
+    }
+
+    function setPage() {
+      $(".pagination").text("");
+      for(i = 0; i < max_page_num; i++){
+        var textadd='<li><a onclick="initialize_table('+i+')">'+(i+1)+'</a></li>';
+        $(textadd).appendTo($(".pagination"));
+        if(i===page_num){
+          $(".pagination li:last").attr("class","active");
+        }
+      }
+    }
+
+    $(document).ready(function(){
+      initialize_table(0);
+    });
+  </script>
+
+  <style>
+  body {
+   background-image: url("bflat.jpg");
+   background-color: #cccccc;
+  }
+
+
+    table, th, td {
+        border: 1px solid none;
+        border-collapse: collapse;
+        table-layout:fixed;
+        word-break:break-all;
+        color: white;
+    }
+    th, td {
+        padding: 5px;
+        text-align: left;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <br>
+
+  <br>
+
+  <div>
+    <select id="select_box" onchange="initialize_table(0)">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+    </select>
+  </div>
+
+  <div class="clone_copy" style="display:none">
+    <table class="table table-sm">
+      <table class="table_sub">
+      <tr>
+        <th></th>
+        <td></td>
+      </tr>
+    </table>
+    </table>
+  </div>
+
+  <div class="copyTo">
+  </div>
+
+  <div class="text-center">
+    <ul class="pagination"></ul>
+  </div>
+
+</body>
+</html>
